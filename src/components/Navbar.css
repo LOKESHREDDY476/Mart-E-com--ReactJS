@@ -45,3 +45,24 @@
     top: -10px;
     left: -10px;
 }
+.navbar .icons {
+    display: flex;
+    gap: 15px;
+}
+
+.user-icon,
+.cart-icon {
+    font-size: 18px;
+    color: #333; /* Adjust the color if needed */
+}
+
+.cart-count {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-size: 12px;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
