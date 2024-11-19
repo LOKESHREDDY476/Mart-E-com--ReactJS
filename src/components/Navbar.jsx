@@ -1,22 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import achieversITLogo from '../Images/achieversIT.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
-
 
 const Navbar = () => {
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
-                    <Link className="navbar-brand" href="#">
-                    <img 
-                        src={achieversITLogo} 
-                        alt="AchieversIT Logo" 
-                        style={{ width: "150px" }} 
-                    />
+                    <Link to="/" className="navbar-brand">
+                        <img
+                            src={achieversITLogo}
+                            alt="AchieversIT Logo"
+                            style={{ width: "150px" }}
+                        />
                     </Link>
                     <button
                         className="navbar-toggler"
@@ -32,22 +30,22 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item ms-2">
-                                <Link className="nav-link">Home</Link>
+                                <Link to="/" className="nav-link">Home</Link>
                             </li>
                             <li className="nav-item ms-2">
-                                <Link className="nav-link" href="#">Shop</Link>
+                                <Link to="shop" className="nav-link">Shop</Link>
                             </li>
                             <li className="nav-item ms-2">
-                                <Link className="nav-link" href="#">Cart</Link>
+                                <Link to="/cart" className="nav-link">Cart</Link>
                             </li>
                         </ul>
                         <div className="d-flex align-items-center">
-                            <Link href="#" className="me-3 ms-2">
+                            <Link to="/profile" className="me-3 ms-2">
                                 <i className="fas fa-user user-icon"></i>
                             </Link>
-                            <Link href="#" className="position-relative ms-2">
+                            <Link to="/cart" className="position-relative ms-2">
                                 <i className="fas fa-shopping-cart cart-icon"></i>
-                                <span 
+                                <span
                                     className="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
                                     0
                                 </span>
