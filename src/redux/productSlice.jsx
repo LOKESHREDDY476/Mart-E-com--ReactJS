@@ -12,19 +12,18 @@ const productSlice = createSlice({
   },
   reducers: {
     setCategories: (state) => {
-      state.categories = ["All", ...new Set(products.map((p) => p.category))];
+      const categories = ["All", ...new Set(state.allProducts.map((p) => p.category))];
+      state.categories = categories;
     },
     filterProducts: (state, action) => {
       const { category, searchText } = action.payload;
-
       state.filteredProducts = state.allProducts.filter((product) => {
         const matchesCategory = category === "All" || product.category === category;
-        const matchesSearch =
-          product.name &&
-          product.name.toLowerCase().includes(searchText.toLowerCase());
+        const matchesSearch = product.productName
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
         return matchesCategory && matchesSearch;
       });
-
       state.selectedCategory = category;
       state.searchText = searchText;
     },

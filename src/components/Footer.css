@@ -1,58 +1,53 @@
 /* Basic Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    background-color: #0a3b6a;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  .footer-section {
-    flex: 1;
-    margin: 0 10px;
-  }
-  
-  .footer-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  .footer-title i {
-    margin-right: 8px; /* Adds space between icon and text */
-    font-size: 1.2em;
-  }
-  
-  .footer-section h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-  }
-  
-  .footer-section p,
-  .footer-section ul,
-  .footer-section address {
-    font-size: 0.9em;
-    line-height: 1.6;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-  }
-  
-  .footer-section ul li {
-    margin-bottom: 8px;
-  }
-  
-  .footer-section a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footer-section a:hover {
-    text-decoration: underline;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #0a3b6a;
+  color: #fff;
+  padding: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 0 10px;
+  min-width: 200px;
+}
+
+.footer-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.footer-title i {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+.footer-section h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
