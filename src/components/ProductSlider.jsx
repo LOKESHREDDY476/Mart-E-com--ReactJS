@@ -1,18 +1,18 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { SliderData } from '../products'; // Ensure this path is correct
+import { SliderData } from "../products"; // Ensure this path is correct
 
 const ProductSlider = () => {
   const settings = {
     dots: false, // Hide navigation dots
     infinite: true, // Infinite scroll
-    speed: 200, // Transition speed
+    speed: 500, // Transition speed
     slidesToShow: 1, // Show only one slide at a time
     slidesToScroll: 1, // Scroll one slide at a time
     autoplay: true, // Enable automatic sliding
-    autoplaySpeed: 2000, // Set interval for auto-sliding
+    autoplaySpeed: 3000, // Set interval for auto-sliding
   };
 
   return (
@@ -30,14 +30,16 @@ const ProductSlider = () => {
           <div
             key={slide.id}
             style={{
-              display: "flex",
+              display: "flex", // Ensure image and text are side by side
+              flexDirection: "row", // Horizontal alignment
               alignItems: "center",
               justifyContent: "space-between",
-              height: "80vh", // Dynamically set height
+              height: "80vh", // Set a uniform height
               backgroundColor: "#f9f9f9",
               padding: "20px",
               borderRadius: "8px",
               boxSizing: "border-box",
+              gap: "20px", // Space between text and image
             }}
           >
             {/* Text Section */}
@@ -47,8 +49,8 @@ const ProductSlider = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                padding: "20px",
                 textAlign: "left",
+                padding: "20px",
               }}
             >
               <h2
@@ -99,8 +101,8 @@ const ProductSlider = () => {
                 src={slide.cover}
                 alt={slide.title}
                 style={{
-                  maxWidth: "90%",
-                  height: "auto",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
                   borderRadius: "8px",
                   objectFit: "contain",
                 }}

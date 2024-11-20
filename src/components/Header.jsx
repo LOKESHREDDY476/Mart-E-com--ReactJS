@@ -2,9 +2,8 @@ import React from 'react'
 import Navbar from './Navbar'
 import FeatureCards from './FeatureCards'
 import ProductSlider from './ProductSlider'
-import ProductList from './ProductList'
 import Footer from './Footer'
-import ProductGrid from './ABC'
+import HomeData from './HomeData'
 
 export default function Header() {
   return (
@@ -12,8 +11,7 @@ export default function Header() {
       <Navbar />
       <ProductSlider />
       <FeatureCards />
-      <ProductList />
-      <ProductGrid /> 
+      <HomeData />
       <Footer />
 
     

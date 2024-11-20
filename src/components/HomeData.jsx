@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { discoutProducts, products } from "../products"; // Ensure the path to products.js is correct
+import { products, discoutProducts } from "../products"; // Ensure correct path to products.js
 import "bootstrap-icons/font/bootstrap-icons.css"; // Ensure Bootstrap Icons are imported
 
-const ProductList = () => {
+const HomeData = () => {
+  // Combine products and discount products
+  const allProducts = [...products, ...discoutProducts];
+
+  // Filter products by category
+  const newArrivals = allProducts.filter((product) => product.categories === "New Arrivals");
+  const bestSales = allProducts.filter((product) => product.categories === "Best Sales");
+  const bigDiscounts = discoutProducts; // Directly use discountProducts for big discounts
+
   // Wishlist state
   const [wishlist, setWishlist] = useState([]);
 
@@ -18,12 +26,12 @@ const ProductList = () => {
   // Track hover state for each product
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
-  return (
-    <div className="container mt-4">
-      {/* Big Discount Section */}
-      <h1 className="text-center mb-4">Big Discount</h1>
+  // Render Product Section
+  const renderProductSection = (title, products, badgeText) => (
+    <>
+      <h1 className="text-center mb-4 mt-5">{title}</h1>
       <div className="row">
-        {discoutProducts.map((product) => (
+        {products.map((product) => (
           <div
             key={product.id}
             className="col-md-4 col-sm-6 mb-4"
@@ -39,13 +47,17 @@ const ProductList = () => {
                   alt={product.name}
                   style={{ height: "200px", objectFit: "cover" }}
                 />
-                {/* Discount Badge */}
-                <span
-                  className="badge bg-primary position-absolute top-0 start-0 m-2"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  {product.discount}
-                </span>
+                {/* Dynamic Badge */}
+                {badgeText && (
+                  <span
+                    className={`badge position-absolute top-0 start-0 m-2 ${
+                      badgeText === "New" ? "bg-success" : badgeText === "Best Sales" ? "bg-warning" : "bg-primary"
+                    }`}
+                    style={{ fontSize: "0.9rem" }}
+                  >
+                    {badgeText}
+                  </span>
+                )}
                 {/* Wishlist Icon */}
                 {hoveredProduct === product.id && (
                   <i
@@ -63,7 +75,7 @@ const ProductList = () => {
                 <h5 className="card-title">{product.productName}</h5>
                 <div className="mb-2">
                   <span className="text-warning">
-                    {"★".repeat(5)} {/* Render 5 filled stars */}
+                    {"★".repeat(Math.round(product.avgRating))} {/* Dynamic rating */}
                   </span>
                 </div>
                 <p className="fw-bold">${product.price}</p>
@@ -73,10 +85,17 @@ const ProductList = () => {
           </div>
         ))}
       </div>
+    </>
+  );
 
-      
+  return (
+    <div className="container mt-4">
+      {/* Render Sections */}
+      {renderProductSection("Big Discounts", bigDiscounts, "Discount")}
+      {renderProductSection("New Arrivals", newArrivals, "New")}
+      {renderProductSection("Best Sales", bestSales, "Best Sales")}
     </div>
   );
 };
 
-export default ProductList;
+export default HomeData;

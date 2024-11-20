@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ProductPage from '../components/ProductPage';
 import Header from '../components/Header';
+import CartPage from "../components/CartPage";
 
 const Routing = () => {
     return (
@@ -12,8 +13,7 @@ const Routing = () => {
             <Routes>
                 <Route path="/" element={<Header />} />
                 <Route path="shop" element={<ProductPage />} />
-                <Route path="cart" element={<h1>Your Cart is Empty</h1>} />
-                <Route path="profile" element={<h1>Profile Page</h1>} />
+                <Route path="cart" element={<CartPage />} />
             </Routes>
         </>
     );

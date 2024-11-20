@@ -93,6 +93,7 @@ export const discoutProducts = [
     productName: "Stone and Beam Westview ",
     imgUrl: productImg01,
     category: "sofa",
+    categories: "Best Sales",
     price: 193,
     discount:30,
     shortDesc:
@@ -112,6 +113,8 @@ export const discoutProducts = [
     productName: "Rivet Bigelow Modern ",
     imgUrl: productImg02,
     category: "sofa",
+    categories: "Best Sales",
+
     price: 253,
     discount:20,
     shortDesc:
@@ -272,6 +275,8 @@ export const products = [
     id: "03",
     productName: "Amazon Brand Modern Sofa",
     imgUrl: productImg03,
+    categories: "Best Sales",
+
     category: "sofa",
     price: 173,
     shortDesc:
@@ -316,6 +321,8 @@ export const products = [
     id: "04",
     productName: "Fllufy Sheep Sofa",
     imgUrl: productImg04,
+    categories: "Best Sales",
+
     category: "sofa",
     price: 163,
     shortDesc:
@@ -340,6 +347,8 @@ export const products = [
     productName: "Faux Velvet Sofa",
     imgUrl: productImg05,
     category: "sofa",
+    categories: "Best Sales",
+
     price: 163,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -408,6 +417,7 @@ export const products = [
     productName: "Modern Arm Sofa",
     imgUrl: productImg007,
     category: "sofa",
+    categories: "Best Sales",
     price: 173,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -476,6 +486,7 @@ export const products = [
     id: "10",
     productName: "Apple iPhone 12 Pro",
     imgUrl: phone01,
+    categories: "New Arrivals",
     category: "mobile",
     price: 799,
     shortDesc:
@@ -520,6 +531,7 @@ export const products = [
     id: "11",
     productName: "Apple iPhone 12 Max",
     imgUrl: phone02,
+    categories: "New Arrivals",
     category: "mobile",
     price: 799,
     shortDesc:
@@ -543,6 +555,7 @@ export const products = [
     id: "12",
     productName: "Realme 8",
     imgUrl: phone03,
+    categories: "New Arrivals",
     category: "mobile",
     price: 599,
     shortDesc:
@@ -566,6 +579,8 @@ export const products = [
     id: "13",
     productName: "One Plus Nord",
     imgUrl: phone04,
+    categories: "New Arrivals",
+
     category: "mobile",
     price: 799,
     shortDesc:
@@ -588,7 +603,10 @@ export const products = [
   {
     id: "14",
     productName: "Apple iPhone 13 Pro",
+
     imgUrl: phone05,
+    categories: "New Arrivals",
+
     category: "mobile",
     price: 899,
     shortDesc:
@@ -613,6 +631,8 @@ export const products = [
     productName: "Samsung Galaxy S22",
     imgUrl: phone06,
     category: "mobile",
+    categories: "New Arrivals",
+
     price: 699,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -728,6 +748,7 @@ export const products = [
     productName: "Beat Studio Wireless",
     imgUrl: wireless01,
     category: "wireless",
+    categories: "New Arrivals",
     price: 199,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -751,6 +772,8 @@ export const products = [
     productName: "Beat EP Headphones",
     imgUrl: wireless03,
     category: "wireless",
+    categories: "New Arrivals",
+
     price: 199,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -773,6 +796,8 @@ export const products = [
     productName: "Black Headphones",
     imgUrl: wireless02,
     category: "wireless",
+    categories: "New Arrivals",
+
     price: 169,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -795,6 +820,8 @@ export const products = [
     productName: "Bluetooth Headphones",
     imgUrl: wireless04,
     category: "wireless",
+    categories: "New Arrivals",
+
     price: 139,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
