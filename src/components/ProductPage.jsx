@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterProducts, setCategories } from "../redux/productSlice";
-// import { addToCart } from "../redux/cartSlice";
 import { useCart } from "../context/CartContext";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -13,39 +12,42 @@ const ProductPage = () => {
   const { filteredProducts, categories, selectedCategory, searchText } =
     useSelector((state) => state.products);
 
+  // Fetch categories when component mounts
   useEffect(() => {
     dispatch(setCategories());
   }, [dispatch]);
 
+  // Handle category change
   const handleCategoryChange = (category) => {
-    dispatch(filterProducts({ category, searchText }));
+    dispatch(filterProducts({ category, searchText })); // Dispatch action to filter products
   };
 
+  // Handle search text change
   const handleSearchChange = (e) => {
-    dispatch(filterProducts({ category: selectedCategory, searchText: e.target.value }));
+    dispatch(
+      filterProducts({ category: selectedCategory, searchText: e.target.value })
+    );
   };
 
   return (
     <>
       <Navbar />
       <div className="container my-4">
-        <div className="d-flex justify-content-between align-items-center">
+        {/* Filter and Search Bar */}
+        <div className="d-flex justify-content-between align-items-center mb-4">
           <div className="dropdown">
-            <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              Filter By Category
-            </button>
-            <ul className="dropdown-menu">
+            <select
+              className="btn btn-primary dropdown-toggle"
+              onChange={(e) => handleCategoryChange(e.target.value)}
+              value={selectedCategory || ""}
+            >
+              <option value="">Filter By Category</option>
               {categories.map((category) => (
-                <li key={category}>
-                  <button
-                    className={`dropdown-item ${selectedCategory === category ? "active" : ""}`}
-                    onClick={() => handleCategoryChange(category)}
-                  >
-                    {category}
-                  </button>
-                </li>
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
-            </ul>
+            </select>
           </div>
           <input
             type="text"
@@ -55,7 +57,9 @@ const ProductPage = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="row mt-4">
+
+        {/* Product List */}
+        <div className="row">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <div key={product.id} className="col-md-4 col-sm-6 mb-4">
@@ -67,12 +71,12 @@ const ProductPage = () => {
                   />
                   <div className="card-body text-center">
                     <h5 className="card-title">{product.productName}</h5>
-                    <p className="fw-bold">${product.price}</p>
+                    <p className="fw-bold">${product.price.toFixed(2)}</p>
                     <button
                       className="btn btn-primary"
                       onClick={() => addToCart(product)}
                     >
-                      +
+                      Add to Cart
                     </button>
                   </div>
                 </div>
