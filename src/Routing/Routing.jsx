@@ -5,18 +5,15 @@ import Header from '../components/Header';
 import CartPage from "../components/CartPage";
 
 const Routing = () => {
-    return (
-        <>
-            {/* Include Navbar on all pages */}
-
-            {/* Define Routes */}
-            <Routes>
-                <Route path="/" element={<Header />} />
-                <Route path="shop" element={<ProductPage />} />
-                <Route path="cart" element={<CartPage />} />
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Header />} />
+        <Route path="/shop" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
+    </>
+  );
 };
 
 export default Routing;

@@ -4,40 +4,76 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const CartPage = () => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, addToCart, removeFromCart, totalItems, totalPrice } = useCart();
 
   return (
-      <>
+    <>
       <Navbar />
-    <div className="container">
-      <h1 className="text-center my-4">Your Cart</h1>
-      {cart.length > 0 ? (
+      <div className="container my-5">
+        <h1 className="text-center mb-4">Your Cart</h1>
         <div className="row">
-          {cart.map((item) => (
-            <div key={item.id} className="col-md-6 col-lg-4 mb-4">
-              <div className="card h-100 shadow-sm">
-                <img src={item.imgUrl} className="card-img-top" alt={item.name} />
-                <div className="card-body">
-                  <h5 className="card-title">{item.productName}</h5>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span className="fw-bold">${item.price}</span>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => removeFromCart(item.id)}
+          {/* Cart Items */}
+          <div className="col-lg-8">
+            {cart.length > 0 ? (
+              <div>
+                {cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="d-flex align-items-center mb-4 shadow-sm p-3 bg-white rounded"
+                  >
+                    {/* Product Image */}
+                    <img
+                      src={item.imgUrl}
+                      alt={item.productName}
+                      style={{
+                        width: "100px",
+                        height: "auto",
+                        objectFit: "cover",
+                        marginRight: "20px",
+                      }}
+                    />
+                    {/* Product Details */}
+                    <div style={{ flex: 1 }}>
+                      <h5 className="mb-1">{item.productName}</h5>
+                      <p className="mb-1">
+                        ${item.price.toFixed(2)} x {item.quantity} ={" "}
+                        <b>${(item.price * item.quantity).toFixed(2)}</b>
+                      </p>
+                    </div>
+                    {/* Quantity Controls */}
+                    <div className="d-flex align-items-center">
+                      <button
+                        className="btn btn-primary btn-sm me-2"
+                        onClick={() => addToCart(item)}
                       >
-                      Remove
-                    </button>
+                        +
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        -
+                      </button>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
+            ) : (
+              <p className="text-center">Your cart is empty.</p>
+            )}
+          </div>
+          {/* Cart Summary */}
+          <div className="col-lg-4">
+            <div className="card shadow-sm p-4 rounded">
+              <h5 className="mb-3">Cart Summary</h5>
+              <p>Total Items: <b>{totalItems}</b></p>
+              <p>Total Price: <b>${totalPrice.toFixed(2)}</b></p>
+              <button className="btn btn-success w-100">Checkout</button>
             </div>
-          ))}
+          </div>
         </div>
-      ) : (
-        <p className="text-center">Your cart is empty.</p>
-      )}
-    </div>
-    <Footer />
+      </div>
+      <Footer />
     </>
   );
 };
