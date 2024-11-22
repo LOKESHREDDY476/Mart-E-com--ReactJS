@@ -23,7 +23,7 @@ const HomeData = () => {
     }
   };
 
-  const renderProductSection = (title, products, badgeText) => (
+  const renderProductSection = (title, products, badgeType) => (
     <>
       <h2 className="text-center mb-4 mt-5">{title}</h2>
       <div className="row">
@@ -46,9 +46,14 @@ const HomeData = () => {
                   alt={product.productName}
                   style={{ height: "200px", objectFit: "cover" }}
                 />
-                {badgeText && (
+                {badgeType === "Discount" && product.discount && (
                   <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                    {badgeText}
+                    {product.discount}% Off
+                  </span>
+                )}
+                {badgeType !== "Discount" && (
+                  <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
+                    {badgeType}
                   </span>
                 )}
                 <div
@@ -72,11 +77,11 @@ const HomeData = () => {
                     <i
                       key={index}
                       className={`bi ${
-                        index < product.rating ? "bi bi-star-fill" : "bi bi-star-fill"
+                        index < product.rating ? "bi-star-fill" : " bi bi-star-fill"
                       }`}
                       style={{
                         fontSize: "1.2rem",
-                        color: index < product.rating ? "gray" : "g",
+                        color: index < product.rating ? "gray" : "gold",
                       }}
                     ></i>
                   ))}
