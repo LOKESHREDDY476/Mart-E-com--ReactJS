@@ -15,6 +15,7 @@ const ProductPage = () => {
     useSelector((state) => state.products);
 
   const [notification, setNotification] = useState({ visible: false, message: "" });
+  const [wishlist, setWishlist] = useState([]);  // Track the wishlist products
 
   useEffect(() => {
     dispatch(setCategories());
@@ -38,6 +39,15 @@ const ProductPage = () => {
   const handleAddToCart = (product) => {
     addToCart(product);
     showNotification(`${product.productName} is added to the cart!`);
+  };
+
+  // Function to toggle the wishlist state for a product
+  const handleWishlistClick = (productId) => {
+    if (!wishlist.includes(productId)) {
+      setWishlist([...wishlist, productId]);
+    } else {
+      setWishlist(wishlist.filter((id) => id !== productId));
+    }
   };
 
   return (
@@ -105,6 +115,24 @@ const ProductPage = () => {
                       }
                     />
                   </Link>
+                  <div className="position-relative">
+                    {/* Wishlist Icon */}
+                    <div
+                      className="position-absolute top-0 end-0 m-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleWishlistClick(product.id)}
+                    >
+                      <i
+                        className="bi bi-heart-fill"
+                        style={{
+                          fontSize: "1.2rem",
+                          color: wishlist.includes(product.id)
+                            ? "red"
+                            : "gray",
+                        }}
+                      ></i>
+                    </div>
+                  </div>
                   <div className="card-body text-center">
                     <h5 className="card-title">{product.productName}</h5>
 
