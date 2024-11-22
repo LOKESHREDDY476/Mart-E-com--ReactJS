@@ -34,7 +34,11 @@ const HomeData = () => {
             onMouseEnter={() => setHoveredProduct(product.id)}
             onMouseLeave={() => setHoveredProduct(null)}
           >
-            <div className="card h-100 shadow-sm">
+            <div
+              className={`card h-100 shadow-sm ${
+                hoveredProduct === product.id ? "border border-primary" : ""
+              }`}
+            >
               <div className="position-relative">
                 <img
                   src={product.imgUrl}
@@ -43,24 +47,40 @@ const HomeData = () => {
                   style={{ height: "200px", objectFit: "cover" }}
                 />
                 {badgeText && (
-                  <span className={`badge position-absolute top-0 start-0 m-2 bg-primary`}>
+                  <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
                     {badgeText}
                   </span>
                 )}
-                {hoveredProduct === product.id && (
+                <div
+                  className="position-absolute top-0 end-0 m-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleWishlistClick(product.id)}
+                >
                   <i
-                    className={`bi bi-heart-fill position-absolute top-0 end-0 m-2`}
+                    className="bi bi-heart-fill"
                     style={{
                       fontSize: "1.2rem",
-                      cursor: "pointer",
                       color: wishlist.includes(product.id) ? "red" : "gray",
                     }}
-                    onClick={() => handleWishlistClick(product.id)}
                   ></i>
-                )}
+                </div>
               </div>
               <div className="card-body text-center">
                 <h5 className="card-title">{product.productName}</h5>
+                <div className="d-flex align-items-center justify-content-center mb-2">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <i
+                      key={index}
+                      className={`bi ${
+                        index < product.rating ? "bi bi-star-fill" : "bi bi-star-fill"
+                      }`}
+                      style={{
+                        fontSize: "1.2rem",
+                        color: index < product.rating ? "gray" : "gold",
+                      }}
+                    ></i>
+                  ))}
+                </div>
                 <p className="fw-bold">${product.price}</p>
                 <button
                   className="btn btn-outline-primary"
