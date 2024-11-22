@@ -6,14 +6,16 @@ const productSlice = createSlice({
   initialState: {
     allProducts: products,
     filteredProducts: products,
-    categories: ["All"],
+    categories: [],
     selectedCategory: "Filter BY Category",
     searchText: "",
   },
   reducers: {
     setCategories: (state) => {
       // Extract unique categories from the products array
-      const categories = ["All", ...new Set(state.allProducts.map((p) => p.category))];
+      const categories = state.allProducts.length
+        ? ["Filter BY Category", ...new Set(state.allProducts.map((p) => p.category))]
+        : ["Filter BY Category"];
       state.categories = categories; // Set categories in the state
     },
     filterProducts: (state, action) => {
@@ -21,9 +23,10 @@ const productSlice = createSlice({
 
       // Filter products based on category and search text
       const filtered = state.allProducts.filter((product) => {
-        const matchesCategory = category === "All" || product.category === category;
-        const matchesSearch =
-          product.productName.toLowerCase().includes(searchText.toLowerCase());
+        const matchesCategory = category === "Filter BY Category" || product.category === category;
+        const matchesSearch = product.productName
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
 
         return matchesCategory && matchesSearch; // Product must match both criteria
       });

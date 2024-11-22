@@ -45,8 +45,8 @@ const HomeData = () => {
   };
 
   const renderProductSection = (title, products, badgeType) => (
-    <>
-      <h2 className="text-center mb-4 mt-5">{title}</h2>
+    <div className="product-section">
+      <h2 className="text-center mb-4">{title}</h2>
       <div className="row">
         {products.map((product) => (
           <div
@@ -126,7 +126,7 @@ const HomeData = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 
   return (
@@ -147,9 +147,12 @@ const HomeData = () => {
         </div>
       )}
 
+      {/* Product Sections */}
       {renderProductSection("Big Discounts", bigDiscounts, "Discount")}
       {renderProductSection("New Arrivals", newArrivals, "New")}
       {renderProductSection("Best Sales", bestSales, "Best Sales")}
+
+     
     </div>
   );
 };

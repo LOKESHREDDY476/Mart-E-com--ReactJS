@@ -15,20 +15,20 @@ const ProductPage = () => {
     useSelector((state) => state.products);
 
   const [notification, setNotification] = useState({ visible: false, message: "" });
-  const [wishlist, setWishlist] = useState([]);  // Track the wishlist products
+  const [wishlist, setWishlist] = useState([]); // Track the wishlist products
 
   useEffect(() => {
     dispatch(setCategories());
   }, [dispatch]);
 
-  const handleCategoryChange = (category) => {
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
     dispatch(filterProducts({ category, searchText }));
   };
 
   const handleSearchChange = (e) => {
-    dispatch(
-      filterProducts({ category: selectedCategory, searchText: e.target.value })
-    );
+    const text = e.target.value;
+    dispatch(filterProducts({ category: selectedCategory || "Filter BY Category", searchText: text }));
   };
 
   const showNotification = (message) => {
@@ -41,7 +41,6 @@ const ProductPage = () => {
     showNotification(`${product.productName} is added to the cart!`);
   };
 
-  // Function to toggle the wishlist state for a product
   const handleWishlistClick = (productId) => {
     if (!wishlist.includes(productId)) {
       setWishlist([...wishlist, productId]);
@@ -67,32 +66,29 @@ const ProductPage = () => {
 
         <div className="d-flex justify-content-between align-items-center mb-4">
           {/* Category Dropdown */}
-          <div className="dropdown">
-            <select
-              className="btn btn-primary dropdown-toggle"
-              onChange={(e) => handleCategoryChange(e.target.value)}
-              value={selectedCategory || ""}
-              aria-label="Filter products by category"
-            >
-              <option value="">Filter By Category</option>
-              {categories?.length > 0 ? (
-                categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No categories available</option>
-              )}
-            </select>
-          </div>
+          <select
+            className="form-select bg-primary text-white w-25"
+            onChange={handleCategoryChange}
+            value={selectedCategory || "Filter BY Category"}
+            aria-label="Filter products by category"
+          >
+            {categories?.length > 0 ? (
+              categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))
+            ) : (
+              <option disabled>No categories available</option>
+            )}
+          </select>
 
           {/* Search Bar */}
           <input
             type="text"
             className="form-control w-50 mt-3"
             placeholder="Search products..."
-            value={searchText}
+            value={searchText || ""}
             onChange={handleSearchChange}
             aria-label="Search products"
           />
@@ -126,9 +122,7 @@ const ProductPage = () => {
                         className="bi bi-heart-fill"
                         style={{
                           fontSize: "1.2rem",
-                          color: wishlist.includes(product.id)
-                            ? "red"
-                            : "gray",
+                          color: wishlist.includes(product.id) ? "red" : "gray",
                         }}
                       ></i>
                     </div>
