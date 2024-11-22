@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { products, discoutProducts } from "../products";
 import { useCart } from "../context/CartContext";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -51,22 +52,27 @@ const HomeData = () => {
               }`}
             >
               <div className="position-relative">
-                <img
-                  src={product.imgUrl}
-                  className="card-img-top"
-                  alt={product.productName}
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
-                {badgeType === "Discount" && product.discountPercentage && (
-                  <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                    {product.discountPercentage}% Off
-                  </span>
-                )}
-                {badgeType !== "Discount" && (
-                  <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                    {badgeType}
-                  </span>
-                )}
+                 {/* Link to Product Details */}
+                 <Link to={`/product/${product.id}`}>
+                    <img
+                      src={product.imgUrl || "placeholder-image-url.jpg"}
+                      className="card-img-top"
+                      alt={product.productName}
+                      onError={(e) =>
+                        (e.target.src = "placeholder-image-url.jpg")
+                      }
+                      />
+                      {badgeType === "Discount" && product.discountPercentage && (
+                        <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
+                          {product.discountPercentage}% Off
+                        </span>
+                      )}
+                      {badgeType !== "Discount" && (
+                        <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
+                          {badgeType}
+                        </span>
+                      )}
+                  </Link>
                 <div
                   className="position-absolute top-0 end-0 m-2"
                   style={{ cursor: "pointer" }}

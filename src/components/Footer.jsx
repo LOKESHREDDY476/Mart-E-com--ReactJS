@@ -15,23 +15,22 @@ const Footer = () => (
     </div>
     <div className="footer-section">
       <h3>About Us</h3>
-      <ul>
-        <li>Careers</li>
-        <li>Our Stores</li>
-        <li>Our Cares</li>
-        <li>Terms & Conditions</li>
-        <li>Privacy Policy</li>
-      </ul>
+        <p>Careers</p>
+        <p>Our Stores</p>
+        <p>Our Cares</p>
+        <p>Terms & Conditions</p>
+        <p>Privacy Policy</p>
+      
     </div>
     <div className="footer-section">
       <h3>Customer Care</h3>
-      <ul>
-        <li>Help Center</li>
-        <li>How to Buy</li>
-        <li>Track Your Order</li>
-        <li>Corporate & Bulk Purchasing</li>
-        <li>Returns & Refunds</li>
-      </ul>
+      
+        <p>Help Center</p>
+        <p>How to Buy</p>
+        <p>Track Your Order</p>
+        <p>Corporate & Bulk Purchasing</p>
+        <p>Returns & Refunds</p>
+      
     </div>
     <div className="footer-section">
       <h3>Contact Us</h3>
