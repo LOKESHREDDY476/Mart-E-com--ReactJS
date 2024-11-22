@@ -102,7 +102,6 @@ const ProductDetails = () => {
               Rating: {product.avgRating}
             </p>
             <p className="price display-4 text-success">${product.price}</p>
-            <p className="description text-secondary">{product.description}</p>
             <div className="quantity-control mb-3">
               <label htmlFor="quantity" className="form-label">
                 Quantity:
@@ -120,6 +119,7 @@ const ProductDetails = () => {
               Add to Cart
             </button>
           </div>
+            <p className="description text-secondary m-5"><b>Description: </b>{product.description}</p>
         </div>
 
         <section className="similar-products mt-5">
