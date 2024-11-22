@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterProducts, setCategories } from "../redux/productSlice";
@@ -14,6 +14,8 @@ const ProductPage = () => {
   const { filteredProducts, categories, selectedCategory, searchText } =
     useSelector((state) => state.products);
 
+  const [notification, setNotification] = useState({ visible: false, message: "" });
+
   useEffect(() => {
     dispatch(setCategories());
   }, [dispatch]);
@@ -26,6 +28,16 @@ const ProductPage = () => {
     dispatch(
       filterProducts({ category: selectedCategory, searchText: e.target.value })
     );
+  };
+
+  const showNotification = (message) => {
+    setNotification({ visible: true, message });
+    setTimeout(() => setNotification({ visible: false, message: "" }), 3000); // Auto-hide after 3 seconds
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    showNotification(`${product.productName} is added to the cart!`);
   };
 
   return (
@@ -117,7 +129,7 @@ const ProductPage = () => {
                     <p className="fw-bold">${product.price.toFixed(2)}</p>
                     <button
                       className="btn btn-primary"
-                      onClick={() => addToCart(product)}
+                      onClick={() => handleAddToCart(product)}
                       aria-label={`Add ${product.productName} to cart`}
                     >
                       +
@@ -133,6 +145,23 @@ const ProductPage = () => {
           )}
         </div>
       </div>
+
+      {/* Notification */}
+      {notification.visible && (
+        <div
+          className="position-fixed top-0 end-0 p-3"
+          style={{
+            zIndex: 1050,
+            backgroundColor: "#28a745",
+            color: "#fff",
+            borderRadius: "8px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          {notification.message}
+        </div>
+      )}
+
       <Footer />
     </>
   );

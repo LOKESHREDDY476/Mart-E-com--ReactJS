@@ -14,6 +14,7 @@ const HomeData = () => {
 
   const [wishlist, setWishlist] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
+  const [notification, setNotification] = useState({ visible: false, message: "" });
 
   const handleWishlistClick = (productId) => {
     if (!wishlist.includes(productId)) {
@@ -21,6 +22,16 @@ const HomeData = () => {
     } else {
       setWishlist(wishlist.filter((id) => id !== productId));
     }
+  };
+
+  const showNotification = (message) => {
+    setNotification({ visible: true, message });
+    setTimeout(() => setNotification({ visible: false, message: "" }), 3000); // Auto-hide after 3 seconds
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    showNotification(`${product.productName} is added to the cart!`);
   };
 
   const renderProductSection = (title, products, badgeType) => (
@@ -46,9 +57,9 @@ const HomeData = () => {
                   alt={product.productName}
                   style={{ height: "200px", objectFit: "cover" }}
                 />
-                {badgeType === "Discount" && product.discount && (
+                {badgeType === "Discount" && product.discountPercentage && (
                   <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                    {product.discount}% Off
+                    {product.discountPercentage}% Off
                   </span>
                 )}
                 {badgeType !== "Discount" && (
@@ -77,7 +88,7 @@ const HomeData = () => {
                     <i
                       key={index}
                       className={`bi ${
-                        index < product.rating ? "bi-star-fill" : " bi bi-star-fill"
+                        index < product.rating ? "bi-star-fill" : "bi bi-star-fill"
                       }`}
                       style={{
                         fontSize: "1.2rem",
@@ -89,7 +100,7 @@ const HomeData = () => {
                 <p className="fw-bold">${product.price}</p>
                 <button
                   className="btn btn-outline-primary"
-                  onClick={() => addToCart(product)}
+                  onClick={() => handleAddToCart(product)}
                 >
                   +
                 </button>
@@ -103,6 +114,22 @@ const HomeData = () => {
 
   return (
     <div className="container mt-4">
+      {/* Notification */}
+      {notification.visible && (
+        <div
+          className="position-fixed top-0 end-0 p-3"
+          style={{
+            zIndex: 1050,
+            backgroundColor: "#4caf50",
+            color: "#fff",
+            borderRadius: "8px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          {notification.message}
+        </div>
+      )}
+
       {renderProductSection("Big Discounts", bigDiscounts, "Discount")}
       {renderProductSection("New Arrivals", newArrivals, "New")}
       {renderProductSection("Best Sales", bestSales, "Best Sales")}
