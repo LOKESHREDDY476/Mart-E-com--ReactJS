@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import './HomeData.css';
 import { Link } from "react-router-dom";
 import { products, discoutProducts } from "../products";
 import { useCart } from "../context/CartContext";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -9,13 +11,20 @@ const HomeData = () => {
   const { addToCart } = useCart();
 
   const allProducts = [...products, ...discoutProducts];
-  const newArrivals = allProducts.filter((product) => product.categories === "New Arrivals");
-  const bestSales = allProducts.filter((product) => product.categories === "Best Sales");
+  const newArrivals = allProducts.filter(
+    (product) => product.categories === "New Arrivals"
+  );
+  const bestSales = allProducts.filter(
+    (product) => product.categories === "Best Sales"
+  );
   const bigDiscounts = discoutProducts;
 
   const [wishlist, setWishlist] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
-  const [notification, setNotification] = useState({ visible: false, message: "" });
+  const [notification, setNotification] = useState({
+    visible: false,
+    message: "",
+  });
 
   const handleWishlistClick = (productId) => {
     if (!wishlist.includes(productId)) {
@@ -52,29 +61,29 @@ const HomeData = () => {
               }`}
             >
               <div className="position-relative">
-                 {/* Link to Product Details */}
-                 <Link to={`/product/${product.id}`}>
-                    <img
-                      src={product.imgUrl || "placeholder-image-url.jpg"}
-                      className="card-img-top"
-                      alt={product.productName}
-                      onError={(e) =>
-                        (e.target.src = "placeholder-image-url.jpg")
-                      }
-                      />
-                      {badgeType === "Discount" && product.discount && (
-                        <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                          {product.discount}% Off
-                        </span>
-                      )}
-                      {badgeType !== "Discount" && (
-                        <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                          {badgeType}
-                        </span>
-                      )}
-                  </Link>
+                {/* Link to Product Details */}
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.imgUrl || "placeholder-image-url.jpg"}
+                    className="card-img-top"
+                    alt={product.productName}
+                    onError={(e) =>
+                      (e.target.src = "placeholder-image-url.jpg")
+                    }
+                  />
+                  {badgeType === "Discount" && product.discount && (
+                    <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
+                      {product.discount}% Off
+                    </span>
+                  )}
+                  {badgeType !== "Discount" && (
+                    <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
+                      {badgeType}
+                    </span>
+                  )}
+                </Link>
                 <div
-                  className="position-absolute top-0 end-0 m-2"
+                  className="position-absolute top-0 end-0 m-2 wishlist-icon"
                   style={{ cursor: "pointer" }}
                   onClick={() => handleWishlistClick(product.id)}
                 >
@@ -94,7 +103,9 @@ const HomeData = () => {
                     <i
                       key={index}
                       className={`bi ${
-                        index < product.rating ? "bi-star-fill" : "bi bi-star-fill"
+                        index < product.rating
+                          ? "bi-star-fill"
+                          : "bi bi-star-fill"
                       }`}
                       style={{
                         fontSize: "1.2rem",
