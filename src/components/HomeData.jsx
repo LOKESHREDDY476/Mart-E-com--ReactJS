@@ -62,9 +62,9 @@ const HomeData = () => {
                         (e.target.src = "placeholder-image-url.jpg")
                       }
                       />
-                      {badgeType === "Discount" && product.discountPercentage && (
+                      {badgeType === "Discount" && product.discount && (
                         <span className="badge position-absolute top-0 start-0 m-2 bg-primary">
-                          {product.discountPercentage}% Off
+                          {product.discount}% Off
                         </span>
                       )}
                       {badgeType !== "Discount" && (
