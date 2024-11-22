@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { products } from '../products';
-import { useCart } from '../context/CartContext';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import tableImage from '../Images/table.jpg';
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { products } from "../products";
+import { useCart } from "../context/CartContext";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import tableImage from "../Images/table.jpg";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -21,7 +21,32 @@ const ProductDetails = () => {
   );
 
   const handleAddToCart = () => {
-    addToCart({ id: product.id, name: product.productName, price: product.price, quantity });
+    addToCart({
+      id: product.id,
+      name: product.productName,
+      imgUrl: product.imgUrl,
+      price: product.price,
+      quantity,
+    });
+  };
+
+  const renderStars = (rating) => {
+    return (
+      <div className="d-flex justify-content-center align-items-center mb-2">
+        {Array.from({ length: 5 }, (_, index) => (
+          <i
+            key={index}
+            className={`bi ${
+              index < rating ? "bi-star-fill" : "bi-star"
+            }`}
+            style={{
+              fontSize: "1.2rem",
+              color: index < rating ? "gold" : "gray",
+            }}
+          ></i>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -31,8 +56,8 @@ const ProductDetails = () => {
         className="banner text-black text-center py-5"
         style={{
           backgroundImage: `url(${tableImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <h1 className="display-4 fw-bold">{product.productName}</h1>
@@ -52,7 +77,8 @@ const ProductDetails = () => {
             <p className="text-muted mb-2">
               Category: <strong>{product.category}</strong>
             </p>
-            <p>⭐ {product.avgRating} ratings</p>
+            {/* Average Rating */}
+            <p className="text-warning text-black">Rating: {(product.avgRating)}</p>
             <p className="price display-4 text-success">${product.price}</p>
             <p className="description text-secondary">{product.description}</p>
             <div className="quantity-control mb-3">
@@ -90,14 +116,18 @@ const ProductDetails = () => {
                     </Link>
                     <div className="card-body text-center">
                       <h5 className="card-title">{similarProduct.productName}</h5>
+                      <p className="text-warning">
+                        {renderStars(similarProduct.avgRating)}
+                      </p>
                       <p className="text-success">${similarProduct.price}</p>
                       <button
                         className="btn btn-outline-primary"
                         onClick={() =>
                           addToCart({
-                            id: product.id,
-                            name: product.productName,
-                            price: product.price,
+                            id: similarProduct.id,
+                            name: similarProduct.productName,
+                            imgUrl: similarProduct.imgUrl,
+                            price: similarProduct.price,
                             quantity: 1,
                           })
                         }

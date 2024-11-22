@@ -76,7 +76,7 @@ const HomeData = () => {
                       }`}
                       style={{
                         fontSize: "1.2rem",
-                        color: index < product.rating ? "gray" : "gold",
+                        color: index < product.rating ? "gray" : "g",
                       }}
                     ></i>
                   ))}
